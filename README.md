@@ -1,8 +1,26 @@
-# uv-python-template
+# UV Python Template
 
-## Documentação
+Um template moderno e eficiente para projetos Python utilizando o gerenciador de pacotes UV.
 
-Este é um template para projetos Python que utiliza o gerenciador de pacotes UV.
+## 🚀 Características
+
+- **Rápido**: Ambiente de desenvolvimento configurado com UV, o gerenciador de pacotes Python ultrarrápido
+- **Pronto para uso**: Estrutura de projeto pré-configurada com boas práticas
+- **Qualidade de código**: Configuração completa de linting e formatação com Ruff
+- **Tipagem estática**: Verificação de tipos com MyPy
+- **Testes automatizados**: Configuração de pytest integrada com pre-commit
+- **CI/CD**: Fluxos de trabalho GitHub Actions prontos para uso
+
+## 🛠️ Ferramentas incluídas
+
+- **UV**: Gerenciador de pacotes e ambientes virtuais ultrarrápido
+- **Ruff**: Linter e formatador Python all-in-one
+- **MyPy**: Verificador de tipos estáticos
+- **Pytest**: Framework de testes
+- **Pre-commit**: Hooks de git para garantir qualidade de código
+- **Commitizen**: Padronização de mensagens de commit
+
+## 🔧 Comece rapidamente
 
 ### Pré-requisitos
 
