@@ -7,7 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  setup:
+  pre-commit:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,35 +35,12 @@ jobs:
       - name: Install dependencies
         run: |
           uv sync
-
-  pre-commit:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-      - name: Restore uv from cache
-        uses: actions/cache/restore@v3
-        with:
-          path: ~/.cargo/bin/uv
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
-          fail-on-cache-miss: true
-      - name: Restore dependencies from cache
-        uses: actions/cache/restore@v3
-        with:
-          path: .venv
-          key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
-          fail-on-cache-miss: true
       - name: Run pre-commit
         run: |
           export PATH="$HOME/.cargo/bin:$PATH"
           uv run pre-commit run --all-files
 
   tests:
-    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -71,18 +48,26 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Restore uv from cache
-        uses: actions/cache/restore@v3
+      - name: Cache uv
+        id: cache-uv
+        uses: actions/cache@v3
         with:
           path: ~/.cargo/bin/uv
           key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
-          fail-on-cache-miss: true
-      - name: Restore dependencies from cache
-        uses: actions/cache/restore@v3
+      - name: Install uv
+        if: steps.cache-uv.outputs.cache-hit != 'true'
+        run: |
+          curl -LsSf https://astral.sh/uv/install.sh | sh
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+      - name: Cache dependencies
+        id: cache-deps
+        uses: actions/cache@v3
         with:
           path: .venv
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
-          fail-on-cache-miss: true
+      - name: Install dependencies
+        run: |
+          uv sync
       - name: Run tests
         run: |
           export PATH="$HOME/.cargo/bin:$PATH"
