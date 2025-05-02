@@ -24,7 +24,6 @@ repos:
     rev: v1.15.0
     hooks:
       - id: mypy
-        language: system
         args: ["--config-file=pyproject.toml", "--explicit-package-bases"]
   - repo: https://github.com/commitizen-tools/commitizen
     rev: v4.6.0
