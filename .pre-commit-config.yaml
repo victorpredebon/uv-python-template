@@ -29,5 +29,11 @@ repos:
     rev: v4.6.0
     hooks:
       - id: commitizen
-      - id: commitizen-branch
-        stages: [pre-push]
+  - repo: local
+    hooks:
+      - id: pytest-check
+        name: pytest-check
+        entry: uv run pytest
+        language: system
+        pass_filenames: false
+        stages: [push]
