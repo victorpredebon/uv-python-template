@@ -1,79 +1,79 @@
 # UV Python Template
 
-Um template moderno e eficiente para projetos Python utilizando o gerenciador de pacotes UV.
+A modern and efficient template for Python projects using the UV package manager.
 
-## 🚀 Características
+## 🚀 Features
 
-- **Rápido**: Ambiente de desenvolvimento configurado com UV, o gerenciador de pacotes Python ultrarrápido
-- **Pronto para uso**: Estrutura de projeto pré-configurada com boas práticas
-- **Qualidade de código**: Configuração completa de linting e formatação com Ruff
-- **Tipagem estática**: Verificação de tipos com MyPy
-- **Testes automatizados**: Configuração de pytest integrada com pre-commit
-- **CI/CD**: Fluxos de trabalho GitHub Actions prontos para uso
+- **Fast**: Development environment configured with UV, the ultra-fast Python package manager
+- **Ready to use**: Pre-configured project structure with best practices
+- **Code quality**: Complete linting and formatting setup with Ruff
+- **Static typing**: Type checking with MyPy
+- **Automated testing**: Pytest configuration integrated with pre-commit
+- **CI/CD**: Ready-to-use GitHub Actions workflows
 
-## 🛠️ Ferramentas incluídas
+## 🛠️ Included Tools
 
-- **UV**: Gerenciador de pacotes e ambientes virtuais ultrarrápido
-- **Ruff**: Linter e formatador Python all-in-one
-- **MyPy**: Verificador de tipos estáticos
-- **Pytest**: Framework de testes
-- **Pre-commit**: Hooks de git para garantir qualidade de código
-- **Commitizen**: Padronização de mensagens de commit
+- **UV**: Ultra-fast Python package manager and virtual environment tool
+- **Ruff**: All-in-one Python linter and formatter
+- **MyPy**: Static type checker
+- **Pytest**: Testing framework
+- **Pre-commit**: Git hooks to ensure code quality
+- **Commitizen**: Standardized commit messages
 
-## 🔧 Comece rapidamente
+## 🔧 Quick Start
 
-### Pré-requisitos
+### Prerequisites
 
-- Python 3.13 ou superior
-- UV instalado (`pip install uv`)
+- Python 3.13 or higher
+- UV installed (`pip install uv`)
 
-### Como usar este template
+### How to use this template
 
-1. Crie e ative um ambiente virtual e instale as dependências:
+1. Create and activate a virtual environment and install dependencies:
    ```bash
    make install
-   source .venv/bin/activate  # No Linux/macOS
-   # ou
-   .venv\Scripts\activate  # No Windows
+   source .venv/bin/activate  # On Linux/macOS
+   # or
+   .venv\Scripts\activate  # On Windows
    ```
 
-2. Configure o pre-commit:
+2. Set up pre-commit:
    ```bash
    make setup-pre-commit
    ```
 
-3. Caso não tenha a versão correta do Python, use o uv para instalar a versão correta.
+3. If you don't have the correct Python version, use uv to install it:
 ```bash
 uv python install 3.13
 ```
 
-### Estrutura do projeto
+### Project Structure
 
 ```
 .
-├── .github/workflows/  # Configurações de CI
-├── src/               # Código fonte
-├── pyproject.toml     # Configuração do projeto
-├── .pre-commit-config.yaml  # Configuração do pre-commit
-├── Makefile           # Comandos úteis
-└── LICENSE            # Licença MIT
+├── .github/workflows/  # CI configurations
+├── src/               # Source code
+├── pyproject.toml     # Project configuration
+├── .pre-commit-config.yaml  # Pre-commit configuration
+├── Makefile           # Useful commands
+└── LICENSE            # MIT License
 ```
 
-### Comandos úteis
+### Useful Commands
 
-O Makefile inclui comandos úteis para desenvolvimento:
+The Makefile includes useful commands for development:
 
 ```bash
-make help                  # Exibe mensagens de ajuda
-make install               # Instala dependências
-make pre-commit            # Executa pre-commit em todos os arquivos
-make setup-pre-commit      # Configura pre-commit
-make pre-commit-autoupdate # Atualiza hooks do pre-commit
-make tests                 # Executa testes
-make coverage              # Executa testes com cobertura
-make clean                 # Limpa artefatos de build e caches
+make help                  # Display help messages
+make install               # Install dependencies
+make pre-commit            # Run pre-commit on all files
+make setup-pre-commit      # Set up pre-commit
+make pre-commit-autoupdate # Update pre-commit hooks
+make tests                 # Run tests
+make coverage              # Run tests with coverage
+make clean                 # Clean build artifacts and caches
 ```
 
-### Licença
+### License
 
-Este projeto está licenciado sob os termos da [Licença MIT](LICENSE).
+This project is licensed under the terms of the [MIT License](LICENSE).
