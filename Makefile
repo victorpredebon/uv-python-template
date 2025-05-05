@@ -1,4 +1,4 @@
-.PHONY: help install activate pre-commit setup-pre-commit pre-commit-autoupdate tests coverage clean
+.PHONY: help install activate pre-commit setup-pre-commit pre-commit-autoupdate tests coverage clean audit
 
 help: ## Display this help message
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "} ; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
@@ -25,3 +25,6 @@ clean: ## Clean build artifacts and caches
 	rm -rf .mypy_cache .pytest_cache __pycache__ packages/*/__pycache__ \
 		packages/*/*.egg-info dist build *.egg-info .ruff_cache .coverage \
 		htmlcov
+
+audit: ## Audit dependencies
+	uv run pip-audit
