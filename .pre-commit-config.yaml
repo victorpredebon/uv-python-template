@@ -25,8 +25,17 @@ repos:
     hooks:
       - id: mypy
         args: ["--config-file=pyproject.toml", "--explicit-package-bases"]
+  - repo: https://github.com/ComPWA/taplo-pre-commit
+    rev: v0.9.3
+    hooks:
+      - id: taplo-format
+      - id: taplo-lint
+  - repo: https://github.com/google/yamlfmt
+    rev: v0.16.0
+    hooks:
+      - id: yamlfmt
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: v4.6.0
+    rev: v4.6.2
     hooks:
       - id: commitizen
   - repo: local
