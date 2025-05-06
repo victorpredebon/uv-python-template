@@ -17,7 +17,7 @@ jobs:
         id: cache-uv
         uses: actions/cache@v3
         with:
-          path: ~/.cargo/bin/uv
+          path: ~/.cargo/bin
           key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
       - name: Install uv
         if: steps.cache-uv.outputs.cache-hit != 'true'
@@ -54,7 +54,7 @@ jobs:
         id: cache-uv
         uses: actions/cache@v3
         with:
-          path: ~/.cargo/bin/uv
+          path: ~/.cargo/bin
           key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
       - name: Install uv
         if: steps.cache-uv.outputs.cache-hit != 'true'
