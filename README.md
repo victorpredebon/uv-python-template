@@ -10,6 +10,7 @@ A modern and efficient template for Python projects using the UV package manager
 - **Static typing**: Type checking with MyPy
 - **Automated testing**: Pytest configuration integrated with pre-commit
 - **CI/CD**: Ready-to-use GitHub Actions workflows
+- **Automated Releases**: Standardized release process with semantic versioning
 
 ## 🛠️ Included Tools
 
@@ -73,6 +74,32 @@ make tests                 # Run tests
 make coverage              # Run tests with coverage
 make clean                 # Clean build artifacts and caches
 ```
+
+## 📦 Release Process
+
+This project uses an automated release process based on conventional commits:
+
+1. All releases must be created from the `main` branch only
+2. Releases are triggered manually through GitHub Actions
+3. The version number is automatically determined based on commit messages:
+   - `fix:` commits trigger a PATCH version increment (0.0.x)
+   - `feat:` commits trigger a MINOR version increment (0.x.0)
+   - Commits with `BREAKING CHANGE:` in the body trigger a MAJOR version increment (x.0.0)
+
+### Creating a Release
+
+1. Ensure all your changes are merged to the `main` branch
+2. Go to the GitHub repository's "Actions" tab
+3. Select the "Release" workflow
+4. Click "Run workflow" and select the `main` branch
+5. Click "Run workflow" to start the release process
+
+The workflow will automatically:
+- Determine the next version based on commit messages
+- Update the version in the project files
+- Generate/update the CHANGELOG.md file
+- Create a git tag
+- Create a GitHub release with the changelog
 
 ### License
 

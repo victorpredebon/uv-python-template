@@ -11,6 +11,12 @@ jobs:
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Check if running on main branch
+        run: |
+          if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
+            echo "This workflow can only be run on the main branch"
+            exit 1
+          fi
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
