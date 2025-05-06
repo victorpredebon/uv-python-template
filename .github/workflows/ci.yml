@@ -32,6 +32,7 @@ jobs:
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
         run: |
+          export PATH="$HOME/.cargo/bin:$PATH"
           uv sync
       - name: Cache pre-commit
         uses: actions/cache@v3
@@ -69,6 +70,7 @@ jobs:
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
         run: |
+          export PATH="$HOME/.cargo/bin:$PATH"
           uv sync
       - name: Run tests
         run: |
