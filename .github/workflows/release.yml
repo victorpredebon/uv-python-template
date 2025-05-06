@@ -1,6 +1,8 @@
 name: Release
 on:
   workflow_dispatch:
+env:
+  UV_PATH: "$HOME/.cargo/bin"
 jobs:
   release:
     runs-on: ubuntu-latest
@@ -31,7 +33,7 @@ jobs:
         if: steps.cache-uv.outputs.cache-hit != 'true'
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+          echo "${{ env.UV_PATH }}" >> $GITHUB_PATH
       - name: Cache dependencies
         id: cache-deps
         uses: actions/cache@v3
@@ -41,7 +43,7 @@ jobs:
       - name: Install dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
         run: |
-          export PATH="$HOME/.cargo/bin:$PATH"
+          export PATH="${{ env.UV_PATH }}:$PATH"
           uv sync
       - name: Configure Git
         run: |
