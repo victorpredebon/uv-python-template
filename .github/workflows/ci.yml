@@ -4,8 +4,6 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
-env:
-  UV_PATH: "$HOME/.cargo/bin"
 jobs:
   pre-commit:
     runs-on: ubuntu-latest
@@ -15,17 +13,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Cache uv
-        id: cache-uv
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/bin
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
       - name: Install uv
-        if: steps.cache-uv.outputs.cache-hit != 'true'
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "${{ env.UV_PATH }}" >> $GITHUB_PATH
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
       - name: Cache dependencies
         id: cache-deps
         uses: actions/cache@v3
@@ -34,9 +25,7 @@ jobs:
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: |
-          export PATH="${{ env.UV_PATH }}:$PATH"
-          uv sync
+        run: uv sync
       - name: Cache pre-commit
         id: cache-pre-commit
         uses: actions/cache@v3
@@ -44,9 +33,7 @@ jobs:
           path: ~/.cache/pre-commit
           key: ${{ runner.os }}-pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
       - name: Run pre-commit
-        run: |
-          export PATH="${{ env.UV_PATH }}:$PATH"
-          uv run pre-commit run --all-files
+        run: uv run pre-commit run --all-files
   tests:
     runs-on: ubuntu-latest
     steps:
@@ -55,17 +42,10 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: '3.13'
-      - name: Cache uv
-        id: cache-uv
-        uses: actions/cache@v3
-        with:
-          path: ~/.cargo/bin
-          key: ${{ runner.os }}-uv-${{ hashFiles('**/pyproject.toml') }}
       - name: Install uv
-        if: steps.cache-uv.outputs.cache-hit != 'true'
         run: |
           curl -LsSf https://astral.sh/uv/install.sh | sh
-          echo "${{ env.UV_PATH }}" >> $GITHUB_PATH
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
       - name: Cache dependencies
         id: cache-deps
         uses: actions/cache@v3
@@ -74,10 +54,6 @@ jobs:
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
         if: steps.cache-deps.outputs.cache-hit != 'true'
-        run: |
-          export PATH="${{ env.UV_PATH }}:$PATH"
-          uv sync
+        run: uv sync
       - name: Run tests
-        run: |
-          export PATH="${{ env.UV_PATH }}:$PATH"
-          uv run pytest --cov=. --cov-report=xml --cov-fail-under=90
+        run: uv run pytest --cov=. --cov-report=xml --cov-fail-under=90
