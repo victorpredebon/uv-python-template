@@ -43,7 +43,7 @@ jobs:
         id: bump_version
         run: |
           uv run python -m commitizen bump --yes
-          echo "NEW_VERSION=$(uv run python -m commitizen version)" >> $GITHUB_OUTPUT
+          echo "NEW_VERSION=$(grep -m 1 'version =' pyproject.toml | cut -d '"' -f2)" >> $GITHUB_OUTPUT
       - name: Push changes and tag
         run: |
           git push
