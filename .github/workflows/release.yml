@@ -32,9 +32,9 @@ jobs:
           path: .venv
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
-        run: uv sync
-      - name: Install commitizen
-        run: uv pip install commitizen
+        run: |
+          uv sync
+          uv pip install -e ".[dev]"
       - name: Configure Git
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
@@ -42,8 +42,8 @@ jobs:
       - name: Bump version and create tag
         id: bump_version
         run: |
-          uv run commitizen bump --yes
-          echo "NEW_VERSION=$(uv run commitizen version)" >> $GITHUB_OUTPUT
+          uv run python -m commitizen bump --yes
+          echo "NEW_VERSION=$(uv run python -m commitizen version)" >> $GITHUB_OUTPUT
       - name: Push changes and tag
         run: |
           git push
