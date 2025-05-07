@@ -24,7 +24,6 @@ jobs:
           path: .venv
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: uv sync
       - name: Cache pre-commit
         id: cache-pre-commit
@@ -53,7 +52,6 @@ jobs:
           path: .venv
           key: ${{ runner.os }}-python-${{ hashFiles('**/pyproject.toml') }}
       - name: Install dependencies
-        if: steps.cache-deps.outputs.cache-hit != 'true'
         run: uv sync
       - name: Run tests
         run: uv run pytest --cov=. --cov-report=xml --cov-fail-under=90
